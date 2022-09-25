@@ -79,6 +79,15 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
+    //yeni eklendi!
+    public async Task<TEntity?> GetAsyncWithInclude(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
+    {
+        IQueryable<TEntity> queryable = Query();
+        if (include != null) queryable = include(queryable);
+        return await queryable.FirstOrDefaultAsync(predicate);
+    }
+
+
     public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
     {
         return Context.Set<TEntity>().FirstOrDefault(predicate);

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Features\ProgramingLanguages\Constants\" />
+    <Folder Include="Features\Technologies\Constants\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -19,6 +19,7 @@ namespace Persistence
 
 
             services.AddScoped<IProgramingLanguageRepository, ProgramingLanguageRepository>();
+            services.AddScoped<ITechnologyRepository, TechnologyRepository>();
 
             return services;
         }
