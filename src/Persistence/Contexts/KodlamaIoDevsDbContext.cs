@@ -1,26 +1,22 @@
-﻿using Domain.Entities;
+﻿using Core.Security.Entities;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Persistence.Contexts
 {
     public class KodlamaIoDevsDbContext : DbContext
     {
-        protected IConfiguration Configuration { get; set; }
         public DbSet<ProgramingLanguage> ProgramingLanguages { get; set; }
         public DbSet<Technology> Technologies { get; set; }
+        
+        // 
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
-
-        public KodlamaIoDevsDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
+        public KodlamaIoDevsDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
-            Configuration = configuration;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //if (!optionsBuilder.IsConfigured)
-            //    base.OnConfiguring(
-            //        optionsBuilder.UseSqlServer(Configuration.GetConnectionString("SomeConnectionString")));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

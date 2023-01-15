@@ -1,4 +1,5 @@
 ﻿using Application.Features.Technologies.Commands.CreateTechnology;
+using Application.Features.Technologies.Commands.DeleteTechnology;
 using Application.Features.Technologies.Commands.UpdateTechnology;
 using Application.Features.Technologies.Dtos;
 using Application.Features.Technologies.Models;
@@ -25,6 +26,7 @@ namespace Application.Features.Technologies.Profiles
 
             //delete
             CreateMap<DeletedTechnologyDto, Technology>().ReverseMap();
+            CreateMap<DeleteTechnologyCommand, Technology>().ReverseMap();
 
             //update
             CreateMap<UpdatedTechnologyDto, Technology>().ReverseMap();
