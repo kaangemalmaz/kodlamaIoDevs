@@ -1,15 +1,24 @@
-﻿using Application.Features.ProgramingLanguages.Dtos;
+﻿using Application.Features.ProgramingLanguages.Constants;
+using Application.Features.ProgramingLanguages.Dtos;
 using Application.Features.ProgramingLanguages.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.ProgramingLanguages.Commands.CreateProgramingLanguage
 {
-    public class CreateProgramingLanguageCommand : IRequest<CreatedProgramingLanguageDto>
+    
+    public class CreateProgramingLanguageCommand : IRequest<CreatedProgramingLanguageDto>, ISecuredRequest
     {
         public string Name { get; set; }
+
+        public string[] Roles { get; } =
+        {
+            ProgrammingLanguageRoles.ProgrammingLanguageAdmin,
+            ProgrammingLanguageRoles.ProgrammingLanguageCreate
+        };
 
         public class CreateProgramingLanguageCommandHandler : IRequestHandler<CreateProgramingLanguageCommand, CreatedProgramingLanguageDto>
         {

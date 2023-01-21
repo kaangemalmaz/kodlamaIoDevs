@@ -38,11 +38,12 @@ namespace Application.Features.Auth.Commands.Login
 
                 AccessToken createdAccessToken = await _authService.CreateAccessToken(user);
                 RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(user, request.IpAdress);
+                RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
 
                 LoginedDto loginedDto = new()
                 {
                     AccessToken = createdAccessToken,
-                    RefreshToken = createdRefreshToken,
+                    RefreshToken = addedRefreshToken,
                 };
 
                 return loginedDto;

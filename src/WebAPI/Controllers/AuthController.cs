@@ -11,7 +11,7 @@ namespace WebAPI.Controllers
     public class AuthController : BaseController
     {
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        public async Task<IActionResult> Register([FromBody]  UserForRegisterDto userForRegisterDto)
         {
             RegisterCommand registerCommand = new()
             {
@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+        public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
         {
             LoginCommand loginCommand = new()
             {
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
                 UserForLoginDto = userForLoginDto
             };
             var result = await Mediator.Send(loginCommand);
-            return Ok(result);
+            return Created("", result.AccessToken);
         }
 
 
